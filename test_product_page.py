@@ -1,6 +1,4 @@
-import time
-
-import pytest
+from .pages.basket_page import BasketPage
 from .pages.product_page import Product_Page
 # @pytest.mark.parametrize('url', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/",])
 class TestProductPage():
@@ -33,14 +31,22 @@ class TestProductPage():
     #     page.add_to_cart()
     #     page.should_not_be_success_message_is_disappeared()
 
-    def test_guest_should_see_login_link_on_product_page(self, browser):
-        url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-        page = Product_Page(browser, url)
+    # def test_guest_should_see_login_link_on_product_page(self, browser):
+    #     url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    #     page = Product_Page(browser, url)
+    #     page.open()
+    #     page.should_be_login_link()
+    #
+    # def test_guest_can_go_to_login_page_from_product_page(self, browser):
+    #     url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    #     page = Product_Page(browser, url)
+    #     page.open()
+    #     page.go_to_login_page()
+    def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
+        url = "http://selenium1py.pythonanywhere.com/"
+        page = BasketPage(browser, url)
         page.open()
-        page.should_be_login_link()
+        page.go_to_basket()
+        page.basket_contents_is_empty()
+        page.basket_empty_text()
 
-    def test_guest_can_go_to_login_page_from_product_page(self, browser):
-        url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-        page = Product_Page(browser, url)
-        page.open()
-        page.go_to_login_page()
